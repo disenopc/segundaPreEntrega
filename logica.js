@@ -14,11 +14,6 @@ for (let array of productoA) {
 }
 
 
-let fondoMenu = document.getElementById("menu");
-fondoMenu.style.background = "black";
-fondoMenu.style.color = "gray";
-console.log(fondoMenu.innerHTML);
-
 let textoBotonUno = document.getElementById("botonUno");
 console.log(textoBotonUno.innerHTML);
 textoBotonUno.innerHTML = "Inicio";
@@ -28,12 +23,12 @@ console.log(textoBotonDos.innerHTML);
 textoBotonDos.innerHTML = "Tienda";
 
 let titulo = document.getElementById("titulo");
-titulo.style.font = "bold  50px Source Serif"
+titulo.style.font = "bold  50px Source Serif";
 
 let fondoFooter = document.getElementById("newsletter");
 fondoFooter.style.background = "black";
 fondoFooter.style.color = "white";
-console.log(fondoMenu.innerHTML);
+console.log(fondoFooter.innerHTML);
 
 //Eventos sobre el dom
 
@@ -87,3 +82,67 @@ function capturarP(e) {
 };
 
 //Eventos de carrito
+let carritoDeCompras = [];
+if (localStorage.getItem("carrito") != null) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+}
+
+productoA.forEach(array => {
+    document.getElementById(`btn${array.id}`).addEventListener('click', function() {
+        agregarAlCarrito(array);
+    });
+})
+
+function agregarAlCarrito(productoNuevo) {
+    carritoDeCompras.push(productoNuevo);
+    console.log(carritoDeCompras);
+    alert("Producto: " + productoNuevo.nombre + " agregado al carrito.");
+    document.getElementById("cuerpoTabla").innerHTML += `
+    <tr>
+    <td>${productoNuevo.id}</td>
+    <td>${productoNuevo.nombre}</td>
+    <td>${productoNuevo.precio}</td>
+    </tr>
+    `;
+    localStorage.setItem("carrito", JSON.stringify(carritoDeCompras));
+}
+
+//Modo cuervo
+let modo = localStorage.getItem("modo");
+if (modo == null) {
+    modo = "black"
+}
+let menu = document.getElementById("menu");
+let botton = document.getElementById("mode");
+
+localStorage.setItem("modo", modo);
+botton.onclick = () => {
+    if (modo == "black") {
+        modoCuervo();
+        modo = "blue";
+    } else {
+        modoDark();
+        modo = "black";
+
+    }
+    localStorage.setItem("modo", modo);
+}
+let elementoMenu = document.getElementsByClassName("botonesMenu");
+
+function modoCuervo() {
+    menu.style.background = "#EC1414";
+    titulo.style.color = "#191D4E";
+    botton.innerText = "Modo Dark";
+    for (const botones of elementoMenu) {
+        botones.style.color = "#191D4E";
+    }
+}
+
+function modoDark() {
+    menu.style.background = "black";
+    titulo.style.color = "gray";
+    botton.innerText = "Modo Cuervo";
+    for (const botones of elementoMenu) {
+        botones.style.color = "gray";
+    }
+}
