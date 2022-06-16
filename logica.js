@@ -132,9 +132,3 @@ boton.onclick = () => {
     }
     localStorage.setItem("modo", modo);
 }
-colorEncabezado();
-
-function colorEncabezado() {
-    let a = document.getElementsByClassName("botonesMenu");
-    a.style.color = "#E8D637";
-}
