@@ -28,3 +28,13 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.blue {
+    background-color: red;
+    color: white;
+}

@@ -13,7 +13,7 @@ for (let array of productoA) {
     card.appendChild(productoL);
 }
 
-
+//Interactuando con el html
 let textoBotonUno = document.getElementById("botonUno");
 console.log(textoBotonUno.innerHTML);
 textoBotonUno.innerHTML = "Inicio";
@@ -30,7 +30,7 @@ fondoFooter.style.background = "black";
 fondoFooter.style.color = "white";
 console.log(fondoFooter.innerHTML);
 
-//Eventos sobre el dom
+
 
 //Eventos sobre el Formulario Newsletter
 
@@ -110,39 +110,31 @@ function agregarAlCarrito(productoNuevo) {
 //Modo cuervo
 let modo = localStorage.getItem("modo");
 if (modo == null) {
-    modo = "black"
-}
+    modo = "dark"
+};
 let menu = document.getElementById("menu");
-let botton = document.getElementById("mode");
-
+let boton = document.getElementById("mode");
+document.body.className = modo;
+menu.className = "navbar navbar-expand-lg " + modo;
 localStorage.setItem("modo", modo);
-botton.onclick = () => {
-    if (modo == "black") {
-        modoCuervo();
-        modo = "blue";
-    } else {
-        modoDark();
-        modo = "black";
 
+boton.onclick = () => {
+    if (modo == "dark") {
+        document.body.className = "blue";
+        menu.className = "navbar navbar-expand-lg blue";
+        modo = "blue";
+        boton.innerText = "Modo Cuervo";
+    } else {
+        document.body.className = "dark";
+        menu.className = "navbar navbar-expand-lg dark";
+        modo = "dark";
+        boton.innerText = "Modo Oscuro";
     }
     localStorage.setItem("modo", modo);
 }
-let elementoMenu = document.getElementsByClassName("botonesMenu");
+colorEncabezado();
 
-function modoCuervo() {
-    menu.style.background = "#EC1414";
-    titulo.style.color = "#191D4E";
-    botton.innerText = "Modo Dark";
-    for (const botones of elementoMenu) {
-        botones.style.color = "#191D4E";
-    }
-}
-
-function modoDark() {
-    menu.style.background = "black";
-    titulo.style.color = "gray";
-    botton.innerText = "Modo Cuervo";
-    for (const botones of elementoMenu) {
-        botones.style.color = "gray";
-    }
+function colorEncabezado() {
+    let a = document.getElementsByClassName("botonesMenu");
+    a.style.color = "#E8D637 ";
 }
